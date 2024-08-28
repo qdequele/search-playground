@@ -33,16 +33,8 @@ const models = [
     label: "cf-bge-small-en-v1.5",
   },
   {
-    value: "voyage-multilingual-2",
-    label: "voyage-multilingual-2",
-  },
-  {
-    value: "voyage-large-2",
-    label: "voyage-large-2",
-  },
-  {
-    value: "voyage-2",
-    label: "voyage-2",
+    value: "mistral",
+    label: "mistral",
   },
   {
     value: "openai-large",
@@ -51,12 +43,24 @@ const models = [
   {
     value: "openai-small",
     label: "openai-small",
-  }
-]
+  },
+  {
+    value: "voyage-2",
+    label: "voyage-2",
+  },
+  {
+    value: "voyage-large-2",
+    label: "voyage-large-2",
+  },
+  {
+    value: "voyage-multilingual-2",
+    label: "voyage-multilingual-2",
+  },
+];
 
 export function ModelSelector({ className, onChange, defaultValue }) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = React.useState("cf-bge-base-en-v1.5")
 
   React.useEffect(() => {
     if (typeof onChange === "function") {

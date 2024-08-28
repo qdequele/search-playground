@@ -109,7 +109,7 @@ function SearchPanel({ query }) {
             <ModelSelector onChange={onModelChange} />
           )}
         </div>
-        {results.processingTimeMs && !isLoading && (
+        {results.processingTimeMs !== 0 && !isLoading && (
           <Badge variant="outline">{results.processingTimeMs}ms</Badge>
         )}
         {isLoading && <Badge variant="outline">Loading...</Badge>}
