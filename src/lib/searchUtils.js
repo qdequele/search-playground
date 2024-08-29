@@ -62,6 +62,8 @@ export async function searchAlgolia({ query, config, abortSignal }) {
         {
           indexName,
           query,
+          hitsPerPage: 5,
+          attributesToRetrieve: ["name", "description", "image"],
         },
       ],
     });
