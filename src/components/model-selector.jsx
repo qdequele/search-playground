@@ -33,6 +33,10 @@ const models = [
     label: "cf-bge-small-en-v1.5",
   },
   {
+    value: "local-bge-base-en-v1.5",
+    label: "local-bge-base-en-v1.5",
+  },
+  {
     value: "mistral",
     label: "mistral",
   },
