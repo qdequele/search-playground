@@ -1,9 +1,7 @@
 "use client";
 import React from "react";
-import Hits from "@/components/hits";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { ModelSelector } from "@/components/model-selector";
 import { SearchPanel } from "@/components/search-panel";
 
 export default function Dashboard() {

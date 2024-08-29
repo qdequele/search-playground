@@ -33,9 +33,11 @@ const Hit = ({ hit }) => {
               <h3 className="text-lg font-semibold line-clamp-1">
                 {hit.name}
               </h3>
+              { hit._rankingScore && (
               <Badge variant="secondary" className="ml-2">
                 {hit._rankingScore.toFixed(2)}
-              </Badge>
+                </Badge>
+              )}
             </div>
             <p className="mt-2 text-sm text-muted-foreground line-clamp-3">
               {hit.description}
