@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { ConfigSelector } from "./config-selector";
 import { search } from "@/lib/searchUtils";
 
-function SearchPanel({ query }) {
-  const [config, setConfig] = React.useState({
+function SearchPanel({ query, initialConfig, onConfigChange }) {
+  const [config, setConfig] = React.useState(initialConfig || {
     engine: "meilisearch",
     mode: "fulltextsearch",
     model: "cf-bge-base-en-v1.5"
@@ -62,14 +62,20 @@ function SearchPanel({ query }) {
     };
   }, [query, debouncedSearch]);
 
-  const onConfigChange = useCallback((newConfig) => {
-    setConfig(newConfig);
-  }, []);
+  const handleConfigChange = useCallback((newConfig) => {
+    setConfig((prevConfig) => {
+      if (JSON.stringify(prevConfig) !== JSON.stringify(newConfig)) {
+        onConfigChange(newConfig);
+        return newConfig;
+      }
+      return prevConfig;
+    });
+  }, [onConfigChange]);
 
   return (
     <div className="">
       <div className="flex items-center justify-between mb-4 flex-wrap">
-        <ConfigSelector onConfigChange={onConfigChange} className="mb-2" />
+        <ConfigSelector onConfigChange={handleConfigChange} initialConfig={config} className="mb-2" />
         <div>
           {results.processingTimeMs !== 0 && !isLoading && (
             <Badge variant="outline">{results.processingTimeMs}ms</Badge>

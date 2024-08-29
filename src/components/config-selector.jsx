@@ -120,14 +120,17 @@ const ComboBox = ({ options, value, onChange, placeholder, className }) => {
   );
 };
 
-export function ConfigSelector({ className, onConfigChange }) {
-  const [engine, setEngine] = React.useState("meilisearch");
-  const [mode, setMode] = React.useState("fulltextsearch");
-  const [model, setModel] = React.useState("cf-bge-base-en-v1.5");
+export function ConfigSelector({ className, onConfigChange, initialConfig }) {
+  const [engine, setEngine] = React.useState(initialConfig?.engine || "meilisearch");
+  const [mode, setMode] = React.useState(initialConfig?.mode || "fulltextsearch");
+  const [model, setModel] = React.useState(initialConfig?.model || "cf-bge-base-en-v1.5");
 
   React.useEffect(() => {
-    onConfigChange({ engine, mode, model });
-  }, [engine, mode, model, onConfigChange]);
+    const newConfig = { engine, mode, model };
+    if (JSON.stringify(newConfig) !== JSON.stringify(initialConfig)) {
+      onConfigChange(newConfig);
+    }
+  }, [engine, mode, model, onConfigChange, initialConfig]);
 
   const handleEngineChange = (newEngine) => {
     setEngine(newEngine);
