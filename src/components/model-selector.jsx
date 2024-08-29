@@ -33,8 +33,28 @@ const models = [
     label: "cf-bge-small-en-v1.5",
   },
   {
+    value: "cohere-embed-english-v3.0",
+    label: "cohere-embed-english-v3.0",
+  },
+  {
+    value: "cohere-embed-multilingual-v3.0",
+    label: "cohere-embed-multilingual-v3.0",
+  },
+  {
+    value: "cohere-embed-english-light-v3.0",
+    label: "cohere-embed-english-light-v3.0",
+  },
+  {
+    value: "cohere-embed-multilingual-light-v3.0",
+    label: "cohere-embed-multilingual-light-v3.0",
+  },
+  {
     value: "local-bge-base-en-v1.5",
     label: "local-bge-base-en-v1.5",
+  },
+  {
+    value: "local-bge-small-en-v1.5",
+    label: "local-bge-small-en-v1.5",
   },
   {
     value: "mistral",
