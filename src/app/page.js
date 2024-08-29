@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { SearchPanel } from "@/components/search-panel";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Dashboard() {
+function DashboardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = React.useState("");
@@ -89,5 +89,13 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Dashboard() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }
