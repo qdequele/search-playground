@@ -26,24 +26,23 @@ const modes = [
 export function ModeSelector({ className, onChange, defaultValue = "fulltextsearch" }) {
   const [value, setValue] = React.useState(defaultValue)
 
-  React.useEffect(() => {
+  const handleValueChange = React.useCallback((newValue) => {
+    setValue(newValue)
     if (typeof onChange === "function") {
-      onChange(value)
+      onChange(newValue)
     }
-  }, [value, onChange])
+  }, [onChange])
+
+  React.useEffect(() => {
+    setValue(defaultValue)
+  }, [defaultValue])
 
   return (
-    <Select
-      value={value}
-      onValueChange={(newValue) => {
-        setValue(newValue)
-        if (typeof onChange === "function") {
-          onChange(newValue)
-        }
-      }}
-    >
+    <Select value={value} onValueChange={handleValueChange}>
       <SelectTrigger className={cn("w-[200px]", className)}>
-        <SelectValue placeholder="Select mode..." />
+        <SelectValue placeholder="Select mode...">
+          {modes.find((mode) => mode.value === value)?.label || "Select mode..."}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
         {modes.map((mode) => (

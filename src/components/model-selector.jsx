@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -12,12 +12,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
 const models = [
   {
@@ -83,26 +83,26 @@ const models = [
 ];
 
 export function ModelSelector({ className, onChange, defaultValue }) {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("cf-bge-base-en-v1.5")
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("cf-bge-base-en-v1.5");
 
   React.useEffect(() => {
     if (typeof onChange === "function") {
-      onChange(value)
+      onChange(value);
     }
     if (typeof defaultValue === "string") {
       if (!value) {
-        setValue(defaultValue)
+        setValue(defaultValue);
       }
     }
-  }, [value])
+  }, [value]);
 
   let selectNewValue = (value) => {
-      setValue(value)
-      if (typeof onChange === "function") {
-        onChange(value)
-      }
-  }
+    setValue(value);
+    if (typeof onChange === "function") {
+      onChange(value);
+    }
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -113,9 +113,11 @@ export function ModelSelector({ className, onChange, defaultValue }) {
           aria-expanded={open}
           className={cn("w-[200px] justify-between", className)}
         >
-          {value
-            ? models.find((framework) => framework.value === value)?.label
-            : "Select model..."}
+          <span className="truncate">
+            {value
+              ? models.find((framework) => framework.value === value)?.label
+              : "Select model..."}
+          </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -130,8 +132,8 @@ export function ModelSelector({ className, onChange, defaultValue }) {
                   key={model.value}
                   value={model.value}
                   onSelect={(currentValue) => {
-                    selectNewValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
+                    selectNewValue(currentValue === value ? "" : currentValue);
+                    setOpen(false);
                   }}
                 >
                   <Check
@@ -148,5 +150,5 @@ export function ModelSelector({ className, onChange, defaultValue }) {
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }
