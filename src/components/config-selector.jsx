@@ -41,8 +41,11 @@ const engines = [
       "cohere-embed-multilingual-v3.0",
       "cohere-embed-english-light-v3.0",
       "cohere-embed-multilingual-light-v3.0",
+      "jina-colbert-v2",
+      "local-all-MiniLM-L6-v2",
       "local-bge-base-en-v1.5",
       "local-bge-small-en-v1.5",
+      "local-gte-small",
       "mistral",
       "openai-large",
       "openai-small",
@@ -51,6 +54,20 @@ const engines = [
       "voyage-multilingual-2",
     ],
   },
+  {
+    value: "supabase",
+    label: "Supabase",
+    modes: [
+      { value: "fulltextsearch", label: "Full-text search" },
+      { value: "semanticsearch", label: "Semantic search" },
+      { value: "hybridsearch", label: "Hybrid search" },
+    ],
+    models: [
+      "gte-base",
+      "gte-large",
+      "gte-small",
+    ],
+  }
 ];
 
 const Selector = ({ options, value, onChange, placeholder, className }) => {
