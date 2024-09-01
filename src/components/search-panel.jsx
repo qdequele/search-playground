@@ -74,9 +74,13 @@ function SearchPanel({ query, initialConfig, onConfigChange }) {
 
   return (
     <div className="">
-      <div className="flex items-center justify-between mb-4 flex-wrap">
-        <ConfigSelector onConfigChange={handleConfigChange} initialConfig={config} className="mb-2" />
-        <div>
+      <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between mb-4">
+        <ConfigSelector 
+          onConfigChange={handleConfigChange} 
+          initialConfig={config} 
+          className="w-full sm:w-auto" 
+        />
+        <div className="self-end sm:self-auto">
           {results.processingTimeMs !== 0 && !isLoading && (
             <Badge variant="outline">{results.processingTimeMs}ms</Badge>
           )}

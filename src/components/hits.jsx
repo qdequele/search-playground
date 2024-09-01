@@ -21,11 +21,11 @@ const Hit = ({ hit }) => {
     <Card className="w-full mb-2">
       <CardContent className="p-4">
         <div className="flex">
-          <div className="flex-shrink-0 mr-4">
+          <div className="flex-shrink-0 mr-4 hidden xs:block">
             <img
               src={hit.image}
               alt={hit.name}
-              className="w-24 h-24 object-cover rounded-lg"
+              className="w-24 h-24 object-cover rounded-lg "
             />
           </div>
           <div className="flex-grow">

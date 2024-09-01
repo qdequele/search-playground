@@ -11,6 +11,7 @@ function DashboardContent() {
   const [searchValue, setSearchValue] = React.useState("");
   const [config1, setConfig1] = React.useState({});
   const [config2, setConfig2] = React.useState({});
+  const [isMobile, setIsMobile] = React.useState(false);
 
   useEffect(() => {
     const query = searchParams.get("q") || "";
@@ -21,6 +22,15 @@ function DashboardContent() {
     if (config1Param) setConfig1(JSON.parse(decodeURIComponent(config1Param)));
     if (config2Param) setConfig2(JSON.parse(decodeURIComponent(config2Param)));
   }, [searchParams]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust breakpoint as needed
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleSearchChange = (event) => {
     const newValue = event.target.value;
@@ -60,33 +70,35 @@ function DashboardContent() {
 
   return (
     <div>
-      <div className="flex justify-center">
-        <div className="relative mb-4">
+      <div className="flex justify-center mb-4">
+        <div className="relative w-full max-w-[336px]">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
             placeholder="Search..."
-            className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
+            className="w-full rounded-lg bg-background pl-8"
             value={searchValue}
             onChange={handleSearchChange}
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 w-full h-full">
-        <div>
-          <SearchPanel
-            query={searchValue}
-            initialConfig={config1}
-            onConfigChange={(cfg) => handleConfigChange(1, cfg)}
-          />
-        </div>
-        <div className="">
+      <div
+        className={`grid ${
+          isMobile ? "grid-cols-1" : "grid-cols-2"
+        } gap-4 w-full h-full`}
+      >
+        <SearchPanel
+          query={searchValue}
+          initialConfig={config1}
+          onConfigChange={(cfg) => handleConfigChange(1, cfg)}
+        />
+        {!isMobile && (
           <SearchPanel
             query={searchValue}
             initialConfig={config2}
             onConfigChange={(cfg) => handleConfigChange(2, cfg)}
           />
-        </div>
+        )}
       </div>
     </div>
   );

@@ -73,7 +73,7 @@ const engines = [
 const Selector = ({ options, value, onChange, placeholder, className }) => {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={cn("w-[150px]", className)}>
+      <SelectTrigger className={cn("w-full", className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
@@ -97,7 +97,7 @@ const ComboBox = ({ options, value, onChange, placeholder, className }) => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={cn("w-[150px] justify-between", className)}
+          className={cn("w-full justify-between", className)}
         >
           <span className="truncate">
             {options.find((option) => option.value === value)?.label || placeholder}
@@ -164,12 +164,13 @@ export function ConfigSelector({ className, onConfigChange, initialConfig }) {
   const showModelSelector = showModeSelector && (mode === "semanticsearch" || mode === "hybridsearch");
 
   return (
-    <div className={cn("flex items-center space-x-4", className)}>
+    <div className={cn("flex flex-col space-y-2 xs:flex-row xs:items-center xs:space-x-4 xs:space-y-0", className)}>
       <Selector
         options={engines}
         value={engine}
         onChange={handleEngineChange}
         placeholder="Select engine..."
+        className="w-full xs:w-[150px]"
       />
 
       {showModeSelector && (
@@ -178,6 +179,7 @@ export function ConfigSelector({ className, onConfigChange, initialConfig }) {
           value={mode}
           onChange={setMode}
           placeholder="Select mode..."
+          className="w-full xs:w-[150px]"
         />
       )}
 
@@ -187,6 +189,7 @@ export function ConfigSelector({ className, onConfigChange, initialConfig }) {
           value={model}
           onChange={setModel}
           placeholder="Select model..."
+          className="w-full xs:w-[150px]"
         />
       )}
     </div>
