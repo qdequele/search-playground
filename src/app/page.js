@@ -28,8 +28,8 @@ function DashboardContent() {
     // Parse config2 from URL parameters
     const config2 = {
       engine: searchParams.get("engine2") || "meilisearch",
-      mode: searchParams.get("mode2") || "fulltextsearch",
-      model: searchParams.get("model2") || "",
+      mode: searchParams.get("mode2") || "hybridsearch",
+      model: searchParams.get("model2") || "local-bge-small-en-v1.5",
     };
     setConfig2(config2);
   }, [searchParams]);
