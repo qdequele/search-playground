@@ -15,12 +15,23 @@ function DashboardContent() {
 
   useEffect(() => {
     const query = searchParams.get("q") || "";
-    const config1Param = searchParams.get("config1");
-    const config2Param = searchParams.get("config2");
-
     setSearchValue(query);
-    if (config1Param) setConfig1(JSON.parse(decodeURIComponent(config1Param)));
-    if (config2Param) setConfig2(JSON.parse(decodeURIComponent(config2Param)));
+
+    // Parse config1 from URL parameters
+    const config1 = {
+      engine: searchParams.get("engine1") || "meilisearch",
+      mode: searchParams.get("mode1") || "fulltextsearch",
+      model: searchParams.get("model1") || "cf-bge-base-en-v1.5",
+    };
+    setConfig1(config1);
+
+    // Parse config2 from URL parameters
+    const config2 = {
+      engine: searchParams.get("engine2") || "meilisearch",
+      mode: searchParams.get("mode2") || "fulltextsearch",
+      model: searchParams.get("model2") || "cf-bge-base-en-v1.5",
+    };
+    setConfig2(config2);
   }, [searchParams]);
 
   useEffect(() => {
@@ -61,10 +72,17 @@ function DashboardContent() {
   const updateURL = (query, cfg1, cfg2) => {
     const params = new URLSearchParams();
     if (query) params.set("q", query);
-    if (Object.keys(cfg1).length)
-      params.set("config1", encodeURIComponent(JSON.stringify(cfg1)));
-    if (Object.keys(cfg2).length)
-      params.set("config2", encodeURIComponent(JSON.stringify(cfg2)));
+
+    // Set config1 parameters
+    if (cfg1.engine) params.set("engine1", cfg1.engine);
+    if (cfg1.mode) params.set("mode1", cfg1.mode);
+    if (cfg1.model) params.set("model1", cfg1.model);
+
+    // Set config2 parameters
+    if (cfg2.engine) params.set("engine2", cfg2.engine);
+    if (cfg2.mode) params.set("mode2", cfg2.mode);
+    if (cfg2.model) params.set("model2", cfg2.model);
+
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
