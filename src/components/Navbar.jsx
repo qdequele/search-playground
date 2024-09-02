@@ -3,10 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { CircleDotDashed, Github, Menu, X } from 'lucide-react';
+import { CircleDotDashed, Github, Menu, X, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
 import { cn } from '@/lib/utils';
+import { FeedbackModal } from '@/components/FeedbackModal';
 
 function NavLink({ href, children, onClick }) {
   const pathname = usePathname();
@@ -31,6 +32,7 @@ function NavLink({ href, children, onClick }) {
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -43,6 +45,8 @@ export function Navbar() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+  const openFeedback = () => setIsFeedbackOpen(true);
+  const closeFeedback = () => setIsFeedbackOpen(false);
 
   return (
     <div className="border-b">
@@ -64,6 +68,10 @@ export function Navbar() {
           </Button>
         ) : (
           <div className="flex items-center space-x-4">
+            <Button variant="outline" onClick={openFeedback}>
+              <MessageSquare className="h-4 w-4 mr-2" />
+              Feedback
+            </Button>
             <Link
               href="https://www.meilisearch.com"
               target="_blank"
@@ -109,7 +117,7 @@ export function Navbar() {
                 >
                   <Button variant="outline" className="w-full justify-start">Go to Meilisearch</Button>
                 </Link>
-                <div className="h-4"></div> {/* Added space */}
+                <div className="h-4"></div>
                 <Link
                   href="https://github.com/meilisearch/meilisearch"
                   target="_blank"
@@ -129,6 +137,7 @@ export function Navbar() {
           </div>
         </div>
       )}
+      <FeedbackModal isOpen={isFeedbackOpen} onClose={closeFeedback} />
     </div>
   );
 }

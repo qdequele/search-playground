@@ -5,6 +5,7 @@ import * as React from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Banner } from "@/components/Banner";
 import { Navbar } from "@/components/Navbar";
+import { FathomAnalytics } from "@/components/fathom";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <FathomAnalytics />
           <Banner />
           <Navbar />
           <div className="flex-1 space-y-4 p-8 pt-6">{children}</div>
