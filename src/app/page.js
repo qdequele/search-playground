@@ -21,7 +21,7 @@ function DashboardContent() {
     const config1 = {
       engine: searchParams.get("engine1") || "meilisearch",
       mode: searchParams.get("mode1") || "fulltextsearch",
-      model: searchParams.get("model1") || "cf-bge-base-en-v1.5",
+      model: searchParams.get("model1") || "",
     };
     setConfig1(config1);
 
@@ -29,7 +29,7 @@ function DashboardContent() {
     const config2 = {
       engine: searchParams.get("engine2") || "meilisearch",
       mode: searchParams.get("mode2") || "fulltextsearch",
-      model: searchParams.get("model2") || "cf-bge-base-en-v1.5",
+      model: searchParams.get("model2") || "",
     };
     setConfig2(config2);
   }, [searchParams]);

@@ -140,7 +140,7 @@ const ComboBox = ({ options, value, onChange, placeholder, className }) => {
 export function ConfigSelector({ className, onConfigChange, initialConfig }) {
   const [engine, setEngine] = React.useState(initialConfig?.engine || "meilisearch");
   const [mode, setMode] = React.useState(initialConfig?.mode || "fulltextsearch");
-  const [model, setModel] = React.useState(initialConfig?.model || "cf-bge-base-en-v1.5");
+  const [model, setModel] = React.useState(initialConfig?.model || "");
 
   React.useEffect(() => {
     const newConfig = { engine, mode, model };
@@ -156,6 +156,14 @@ export function ConfigSelector({ className, onConfigChange, initialConfig }) {
       setModel("");
     } else {
       setMode("fulltextsearch");
+      setModel("");
+    }
+  };
+
+  const handleModeChange = (newMode) => {
+    setMode(newMode);
+    if (newMode === "fulltextsearch") {
+      setModel("");
     }
   };
 
@@ -177,7 +185,7 @@ export function ConfigSelector({ className, onConfigChange, initialConfig }) {
         <Selector
           options={currentEngine.modes}
           value={mode}
-          onChange={setMode}
+          onChange={handleModeChange}
           placeholder="Select mode..."
           className="w-full xs:w-[150px]"
         />
