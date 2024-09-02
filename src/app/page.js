@@ -109,14 +109,14 @@ function DashboardContent() {
           query={searchValue}
           initialConfig={config1}
           onConfigChange={(cfg) => handleConfigChange(1, cfg)}
-          panelNumber={1}
+          comparedToConfig={config2}
         />
         {!isMobile && (
           <SearchPanel
             query={searchValue}
             initialConfig={config2}
             onConfigChange={(cfg) => handleConfigChange(2, cfg)}
-            panelNumber={2}
+            comparedToConfig={config1}
           />
         )}
       </div>

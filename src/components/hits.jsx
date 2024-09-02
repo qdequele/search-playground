@@ -2,14 +2,43 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import { toast } from "sonner";
 
-const Hits = ({ results, config, panelNumber }) => {
+const Hits = ({ results, config, compared_to, query }) => {
+  const handleStarClick = (data) => {
+    // Send data to the Next.js API route
+    fetch('/api/sendToAmplitude', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      toast("Thanks for your feedback!");
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
+
   return (
     <div className="relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
       {results && results.length > 0 && (
         <div className="w-full">
           {results.map((result, index) => (
-            <Hit key={index} hit={result} config={config} panelNumber={panelNumber} />
+            <Hit
+              key={index}
+              hit={result}
+              config={config}
+              compared_to={compared_to}
+              query={query}
+              position={index}
+              onStarClick={handleStarClick}
+            />
           ))}
         </div>
       )}
@@ -17,15 +46,20 @@ const Hits = ({ results, config, panelNumber }) => {
   );
 };
 
-const Hit = ({ hit, config, panelNumber }) => {
+const Hit = ({ hit, config, compared_to, query, position, onStarClick }) => {
   const handleStarClick = () => {
     const data = {
       hit,
       config,
-      panelNumber,
+      compared_to,
+      query,
+      position,
     };
+
     // Replace with your third-party API call
     console.log("Star clicked:", data);
+
+    onStarClick(data);
   };
 
   return (

@@ -3,11 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { CircleDotDashed, Github, Menu, X, MessageSquare } from 'lucide-react';
+import { Github, Menu, X, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
 import { cn } from '@/lib/utils';
 import { FeedbackModal } from '@/components/FeedbackModal';
+import Image from "next/image";
 
 function NavLink({ href, children, onClick }) {
   const pathname = usePathname();
@@ -52,7 +53,12 @@ export function Navbar() {
     <div className="border-b">
       <div className="flex items-center justify-between mx-6 my-3">
         <div className="flex items-center">
-          <CircleDotDashed className="h-6 w-6" />
+          <Image
+            src="/meilisearch.svg"
+            alt="Meilisearch Logo"
+            width={40}
+            height={40}
+          />
           <h1 className="pl-6 font-bold text-lg">Search Playground</h1>
           {!isMobile && (
             <nav className="ml-6 space-x-4 flex items-center">

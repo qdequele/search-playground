@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ConfigSelector } from "./config-selector";
 import { search } from "@/lib/searchUtils";
 
-function SearchPanel({ query, initialConfig, onConfigChange, panelNumber }) {
+function SearchPanel({ query, initialConfig, onConfigChange, comparedToConfig }) {
   const [config, setConfig] = React.useState(initialConfig || {
     engine: "meilisearch",
     mode: "fulltextsearch",
@@ -87,7 +87,7 @@ function SearchPanel({ query, initialConfig, onConfigChange, panelNumber }) {
           {isLoading && <Badge variant="outline">Loading...</Badge>}
         </div>
       </div>
-      <Hits results={results.hits} config={config} panelNumber={panelNumber}></Hits>
+      <Hits results={results.hits} config={config} compared_to={comparedToConfig} query={query}></Hits>
     </div>
   );
 }
