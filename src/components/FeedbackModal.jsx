@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogOverlay, DialogTitle, DialogDescription, DialogHeader, DialogFooter } from '@/components/ui/dialog';
 import { Smile, Meh, Frown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from "sonner";
 
 export function FeedbackModal({ isOpen, onClose }) {
   const [feedback, setFeedback] = useState('');
@@ -15,20 +16,32 @@ export function FeedbackModal({ isOpen, onClose }) {
       rating,
     };
 
-    // Replace with your Notion API call
-    const notionResponse = await fetch('/api/sendFeedback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const notionResponse = await fetch('/api/sendFeedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (notionResponse.ok) {
-      console.log('Feedback sent:', data);
-      onClose();
-    } else {
-      console.error('Failed to send feedback');
+      if (notionResponse.ok) {
+        console.log('Feedback sent:', data);
+        toast.success("Thank you for your feedback!", {
+          description: "Your feedback has been sent successfully.",
+        });
+        onClose();
+      } else {
+        console.error('Failed to send feedback');
+        toast.error("Failed to send feedback", {
+          description: "Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error('Error sending feedback:', error);
+      toast.error("An unexpected error occurred", {
+        description: "Please try again later.",
+      });
     }
   };
 

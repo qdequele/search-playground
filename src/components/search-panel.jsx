@@ -4,6 +4,7 @@ import Hits from "@/components/hits";
 import { Badge } from "@/components/ui/badge";
 import { ConfigSelector } from "./config-selector";
 import { search } from "@/lib/searchUtils";
+import { cn } from "@/lib/utils";
 
 function SearchPanel({ query, initialConfig, onConfigChange, comparedToConfig }) {
   const [config, setConfig] = React.useState(initialConfig || {
@@ -14,6 +15,7 @@ function SearchPanel({ query, initialConfig, onConfigChange, comparedToConfig })
   const [results, setResults] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const abortControllerRef = useRef(null);
+  const [searchError, setSearchError] = React.useState(false);
 
   const runSearch = useCallback(async (searchQuery) => {
     if (abortControllerRef.current) {
@@ -32,12 +34,14 @@ function SearchPanel({ query, initialConfig, onConfigChange, comparedToConfig })
       if (response.query === searchQuery) {
         setResults(response);
         setIsLoading(false);
+        setSearchError(false);
       } else {
         console.log("Query changed, skipping results update");
       }
     } catch (error) {
       if (error.name !== "AbortError") {
         console.error("Search error:", error);
+        setSearchError(true);
       }
       setIsLoading(false);
     }
@@ -81,8 +85,15 @@ function SearchPanel({ query, initialConfig, onConfigChange, comparedToConfig })
           className="w-full sm:w-auto" 
         />
         <div className="self-end sm:self-auto">
-          {results.processingTimeMs !== 0 && !isLoading && (
-            <Badge variant="outline">{results.processingTimeMs}ms</Badge>
+          {!isLoading && (
+            <Badge 
+              variant="outline" 
+              className={cn(
+                searchError && "bg-transparent text-red-800 border-red-300"
+              )}
+            >
+              {searchError ? "x" : `${results.processingTimeMs}ms`}
+            </Badge>
           )}
           {isLoading && <Badge variant="outline">Loading...</Badge>}
         </div>

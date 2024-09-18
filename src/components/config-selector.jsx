@@ -54,20 +54,20 @@ const engines = [
       "voyage-multilingual-2",
     ],
   },
-  {
-    value: "supabase",
-    label: "Supabase",
-    modes: [
-      { value: "fulltextsearch", label: "Full-text search" },
-      { value: "semanticsearch", label: "Semantic search" },
-      { value: "hybridsearch", label: "Hybrid search" },
-    ],
-    models: [
-      "gte-base",
-      "gte-large",
-      "gte-small",
-    ],
-  }
+  // {
+  //   value: "supabase",
+  //   label: "Supabase",
+  //   modes: [
+  //     { value: "fulltextsearch", label: "Full-text search" },
+  //     { value: "semanticsearch", label: "Semantic search" },
+  //     { value: "hybridsearch", label: "Hybrid search" },
+  //   ],
+  //   models: [
+  //     "gte-base",
+  //     "gte-large",
+  //     "gte-small",
+  //   ],
+  // }
 ];
 
 const Selector = ({ options, value, onChange, placeholder, className }) => {
