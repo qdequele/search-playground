@@ -54,6 +54,22 @@ const engines = [
       "voyage-multilingual-2",
     ],
   },
+  {
+    value: "typesense",
+    label: "Typesense",
+    modes: [
+      { value: "fulltextsearch", label: "Full-text search" },
+      { value: "semanticsearch", label: "Semantic search" },
+      { value: "hybridsearch", label: "Hybrid search" },
+    ],
+    models: [
+      "local_all-MiniLM-L12-v2",
+      "local_gte-small",
+      "openai-ada-002",
+      "openai-3-large",
+      "openai-3-small"
+    ]
+  }
   // {
   //   value: "supabase",
   //   label: "Supabase",
@@ -151,24 +167,27 @@ export function ConfigSelector({ className, onConfigChange, initialConfig }) {
 
   const handleEngineChange = (newEngine) => {
     setEngine(newEngine);
-    if (newEngine === "algolia") {
-      setMode("");
-      setModel("");
-    } else {
-      setMode("fulltextsearch");
-      setModel("");
-    }
+    const currentEngine = engines.find(e => e.value === newEngine);
+    
+    // Set mode to the first available mode, or empty string if no modes
+    setMode(currentEngine.modes ? currentEngine.modes[0].value : "");
+    
+    // Set model to the first available model, or empty string if no models
+    setModel(currentEngine.models ? currentEngine.models[0] : "");
   };
 
   const handleModeChange = (newMode) => {
     setMode(newMode);
+    const currentEngine = engines.find(e => e.value === engine);
+    
+    // If the new mode is "fulltextsearch", reset the model to the first available one
     if (newMode === "fulltextsearch") {
-      setModel("");
+      setModel(currentEngine.models ? currentEngine.models[0] : "");
     }
   };
 
   const currentEngine = engines.find((e) => e.value === engine);
-  const showModeSelector = engine === "meilisearch";
+  const showModeSelector = currentEngine && currentEngine.modes;
   const showModelSelector = showModeSelector && (mode === "semanticsearch" || mode === "hybridsearch");
 
   return (
