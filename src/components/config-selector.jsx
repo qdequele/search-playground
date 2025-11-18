@@ -52,6 +52,7 @@ const engines = [
       "voyage-2",
       "voyage-large-2",
       "voyage-multilingual-2",
+      "titan"
     ],
   },
   {
