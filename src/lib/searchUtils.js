@@ -3,32 +3,29 @@ import { algoliasearch } from "algoliasearch";
 import Typesense from "typesense";
 
 const meilisearchClient = new MeiliSearch({
-  host: "https://ms-5b551fba0b81-185.lon.meilisearch.io",
-  apiKey: "9dbfdfd7a1a99d353f6673b4ad27601029f04d70ff89e578646244e25db0ded2",
+  host: process.env.NEXT_PUBLIC_MEILISEARCH_HOST,
+  apiKey: process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY,
 });
 
 const algoliaClient = algoliasearch(
-  "NXA0NRXXE7",
-  "cbc5b2b33ad87c598a6153fa89aa1a70"
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY,
 );
-
-const typesenseApiKey = "sc9payw963w65pbpndiziptgbh07zzdb";
-const typesenseHost = "https://typesense-production-9968.up.railway.app";
 
 const typesenseClient = new Typesense.Client({
   nodes: [
     {
-      host: "typesense-production-9968.up.railway.app",
-      port: "443",
-      protocol: "https",
+      host: new URL(process.env.NEXT_PUBLIC_TYPESENSE_HOST).hostname,
+      port: process.env.NEXT_PUBLIC_TYPESENSE_PORT,
+      protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
     },
   ],
-  apiKey: "sc9payw963w65pbpndiziptgbh07zzdb",
+  apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
   connectionTimeoutSeconds: 2,
 });
 
 export async function searchMeilisearch({ query, config, abortSignal }) {
-  const index = meilisearchClient.index("bestbuy");
+  const index = meilisearchClient.index(process.env.NEXT_PUBLIC_MEILISEARCH_INDEX);
   let searchParams = {
     showRankingScore: true,
     attributesToRetrieve: ["name", "description", "image"],
@@ -70,7 +67,7 @@ export async function searchMeilisearch({ query, config, abortSignal }) {
 }
 
 export async function searchAlgolia({ query, config, abortSignal }) {
-  const indexName = "bestbuy";
+  const indexName = process.env.NEXT_PUBLIC_ALGOLIA_INDEX;
 
   try {
     const { results } = await algoliaClient.search({
@@ -128,7 +125,7 @@ export async function searchTypesense({ query, config, abortSignal }) {
 
   try {
     const searchResults = await typesenseClient
-      .collections("bestbuy")
+      .collections(process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION)
       .documents()
       .search(searchParameters, { abortSignal });
 
