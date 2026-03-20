@@ -13,6 +13,8 @@ const models = [
   { name: "cf-bge-small-en-v1.5", provider: "Cloudflare", source: "rest", dimensions: 384, indexingTime: "28s" },
   { name: "cf-bge-base-en-v1.5", provider: "Cloudflare", source: "rest", dimensions: 768, indexingTime: "28s" },
   { name: "cf-bge-large-en-v1.5", provider: "Cloudflare", source: "rest", dimensions: 1024, indexingTime: "59s" },
+  { name: "cf-embeddinggemma-300m", provider: "Cloudflare", source: "rest", dimensions: 768, indexingTime: "1m 19s", isNew: true },
+  { name: "cf-qwen3-embedding-0.6b", provider: "Cloudflare", source: "rest", dimensions: 1024, indexingTime: "4m 3s", isNew: true },
   // Cohere
   { name: "cohere-embed-english-light-v3.0", provider: "Cohere", source: "rest", dimensions: 384, indexingTime: "23s" },
   { name: "cohere-embed-english-v3.0", provider: "Cohere", source: "rest", dimensions: 1024, indexingTime: "~30s" },

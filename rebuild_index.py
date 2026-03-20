@@ -145,6 +145,8 @@ EMBEDDERS = {
     "cf-bge-small-en-v1.5": cf_embedder("@cf/baai/bge-small-en-v1.5", 384),
     "cf-bge-base-en-v1.5": cf_embedder("@cf/baai/bge-base-en-v1.5", 768),
     "cf-bge-large-en-v1.5": cf_embedder("@cf/baai/bge-large-en-v1.5", 1024),
+    "cf-embeddinggemma-300m": cf_embedder("@cf/google/embeddinggemma-300m", 768),
+    "cf-qwen3-embedding-0.6b": cf_embedder("@cf/qwen/qwen3-embedding-0.6b", 1024),
 
     # ── Cohere v3 (kept for comparison) ───────────────────────────────────
     "cohere-embed-english-light-v3.0": cohere_v1_embedder("embed-english-light-v3.0", 384),

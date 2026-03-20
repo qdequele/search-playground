@@ -37,6 +37,8 @@ const engines = [
       "cf-bge-small-en-v1.5",
       "cf-bge-base-en-v1.5",
       "cf-bge-large-en-v1.5",
+      "cf-embeddinggemma-300m",
+      "cf-qwen3-embedding-0.6b",
       "cohere-embed-english-light-v3.0",
       "cohere-embed-english-v3.0",
       "cohere-embed-multilingual-light-v3.0",
