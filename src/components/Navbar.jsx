@@ -65,6 +65,7 @@ export function Navbar() {
               <NavLink href="/">Playground</NavLink>
               <NavLink href="/info">Info</NavLink>
               <NavLink href="/guides">Guides</NavLink>
+              <NavLink href="/models">Models</NavLink>
             </nav>
           )}
         </div>
