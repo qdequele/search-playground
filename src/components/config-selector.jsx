@@ -62,22 +62,22 @@ const engines = [
       "voyage-3-large",
     ],
   },
-  {
-    value: "typesense",
-    label: "Typesense",
-    modes: [
-      { value: "fulltextsearch", label: "Full-text search" },
-      { value: "semanticsearch", label: "Semantic search" },
-      { value: "hybridsearch", label: "Hybrid search" },
-    ],
-    models: [
-      "local_all-MiniLM-L12-v2",
-      "local_gte-small",
-      "openai-ada-002",
-      "openai-3-large",
-      "openai-3-small"
-    ]
-  }
+  // {
+  //   value: "typesense",
+  //   label: "Typesense",
+  //   modes: [
+  //     { value: "fulltextsearch", label: "Full-text search" },
+  //     { value: "semanticsearch", label: "Semantic search" },
+  //     { value: "hybridsearch", label: "Hybrid search" },
+  //   ],
+  //   models: [
+  //     "local_all-MiniLM-L12-v2",
+  //     "local_gte-small",
+  //     "openai-ada-002",
+  //     "openai-3-large",
+  //     "openai-3-small"
+  //   ]
+  // }
   // {
   //   value: "supabase",
   //   label: "Supabase",
