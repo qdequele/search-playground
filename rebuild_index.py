@@ -188,6 +188,34 @@ EMBEDDERS = {
         "response": {"data": [{"embedding": "{{embedding}}"}, "{{..}}"]},
         "headers": {},
     },
+    "jina-embeddings-v5-text-small": {
+        "source": "rest",
+        "apiKey": env['JINA_API_KEY'],
+        "dimensions": 1024,
+        "documentTemplate": DOC_TEMPLATE,
+        "documentTemplateMaxBytes": DOC_TEMPLATE_MAX_BYTES,
+        "url": "https://api.jina.ai/v1/embeddings",
+        "request": {
+            "model": "jina-embeddings-v5-text-small",
+            "input": ["{{text}}", "{{..}}"],
+        },
+        "response": {"data": [{"embedding": "{{embedding}}"}, "{{..}}"]},
+        "headers": {},
+    },
+    "jina-embeddings-v5-text-nano": {
+        "source": "rest",
+        "apiKey": env['JINA_API_KEY'],
+        "dimensions": 768,
+        "documentTemplate": DOC_TEMPLATE,
+        "documentTemplateMaxBytes": DOC_TEMPLATE_MAX_BYTES,
+        "url": "https://api.jina.ai/v1/embeddings",
+        "request": {
+            "model": "jina-embeddings-v5-text-nano",
+            "input": ["{{text}}", "{{..}}"],
+        },
+        "response": {"data": [{"embedding": "{{embedding}}"}, "{{..}}"]},
+        "headers": {},
+    },
 
     # ── Local HuggingFace models ──────────────────────────────────────────
     "local-all-MiniLM-L6-v2": {

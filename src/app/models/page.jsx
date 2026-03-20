@@ -26,6 +26,8 @@ const models = [
   // Jina
   { name: "jina-colbert-v2", provider: "Jina", source: "rest", dimensions: 128, indexingTime: "~30s" },
   { name: "jina-embeddings-v3", provider: "Jina", source: "rest", dimensions: 1024, indexingTime: "1m 35s", isNew: true },
+  { name: "jina-embeddings-v5-text-small", provider: "Jina", source: "rest", dimensions: 1024, indexingTime: "1m 30s", isNew: true },
+  { name: "jina-embeddings-v5-text-nano", provider: "Jina", source: "rest", dimensions: 768, indexingTime: "2m 5s", isNew: true },
   // Local HuggingFace
   { name: "local-all-MiniLM-L6-v2", provider: "HuggingFace (local)", source: "huggingFace", dimensions: 384, indexingTime: "19m 53s" },
   { name: "local-bge-base-en-v1.5", provider: "HuggingFace (local)", source: "huggingFace", dimensions: 768, indexingTime: "~120m" },

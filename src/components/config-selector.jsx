@@ -47,6 +47,8 @@ const engines = [
       "gemini-embedding-001",
       "jina-colbert-v2",
       "jina-embeddings-v3",
+      "jina-embeddings-v5-text-small",
+      "jina-embeddings-v5-text-nano",
       "local-all-MiniLM-L6-v2",
       "local-bge-base-en-v1.5",
       "local-bge-small-en-v1.5",
