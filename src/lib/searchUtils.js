@@ -2,30 +2,48 @@ import { MeiliSearch } from "meilisearch";
 import { algoliasearch } from "algoliasearch";
 import Typesense from "typesense";
 
-const meilisearchClient = new MeiliSearch({
-  host: process.env.NEXT_PUBLIC_MEILISEARCH_HOST,
-  apiKey: process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY,
-});
+let _meilisearchClient;
+function getMeilisearchClient() {
+  if (!_meilisearchClient) {
+    _meilisearchClient = new MeiliSearch({
+      host: process.env.NEXT_PUBLIC_MEILISEARCH_HOST,
+      apiKey: process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY,
+    });
+  }
+  return _meilisearchClient;
+}
 
-const algoliaClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY,
-);
+let _algoliaClient;
+function getAlgoliaClient() {
+  if (!_algoliaClient) {
+    _algoliaClient = algoliasearch(
+      process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+      process.env.NEXT_PUBLIC_ALGOLIA_API_KEY,
+    );
+  }
+  return _algoliaClient;
+}
 
-const typesenseClient = new Typesense.Client({
-  nodes: [
-    {
-      host: new URL(process.env.NEXT_PUBLIC_TYPESENSE_HOST).hostname,
-      port: process.env.NEXT_PUBLIC_TYPESENSE_PORT,
-      protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
-    },
-  ],
-  apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
-  connectionTimeoutSeconds: 2,
-});
+let _typesenseClient;
+function getTypesenseClient() {
+  if (!_typesenseClient) {
+    _typesenseClient = new Typesense.Client({
+      nodes: [
+        {
+          host: new URL(process.env.NEXT_PUBLIC_TYPESENSE_HOST).hostname,
+          port: process.env.NEXT_PUBLIC_TYPESENSE_PORT,
+          protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
+        },
+      ],
+      apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
+      connectionTimeoutSeconds: 2,
+    });
+  }
+  return _typesenseClient;
+}
 
 export async function searchMeilisearch({ query, config, abortSignal }) {
-  const index = meilisearchClient.index(process.env.NEXT_PUBLIC_MEILISEARCH_INDEX);
+  const index = getMeilisearchClient().index(process.env.NEXT_PUBLIC_MEILISEARCH_INDEX);
   let searchParams = {
     showRankingScore: true,
     attributesToRetrieve: ["name", "description", "image"],
@@ -70,7 +88,7 @@ export async function searchAlgolia({ query, config, abortSignal }) {
   const indexName = process.env.NEXT_PUBLIC_ALGOLIA_INDEX;
 
   try {
-    const { results } = await algoliaClient.search({
+    const { results } = await getAlgoliaClient().search({
       requests: [
         {
           indexName,
@@ -124,7 +142,7 @@ export async function searchTypesense({ query, config, abortSignal }) {
   }
 
   try {
-    const searchResults = await typesenseClient
+    const searchResults = await getTypesenseClient()
       .collections(process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION)
       .documents()
       .search(searchParameters, { abortSignal });
