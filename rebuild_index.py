@@ -355,6 +355,24 @@ EMBEDDERS = {
         "response": ["{{embedding}}", "{{..}}"],
         "headers": {},
     },
+    "ms-bge-m3": {
+        "source": "composite",
+        "searchEmbedder": {
+            "source": "huggingFace",
+            "model": "BAAI/bge-m3",
+            "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        },
+        "indexingEmbedder": {
+            "source": "rest",
+            "apiKey": env['HUGGINGFACE_API_KEY'],
+            "documentTemplate": DOC_TEMPLATE,
+            "documentTemplateMaxBytes": DOC_TEMPLATE_MAX_BYTES,
+            "url": "https://dh21a9te5svpu9rf.us-east-1.aws.endpoints.huggingface.cloud",
+            "request": {"inputs": ["{{text}}", "{{..}}"]},
+            "response": ["{{embedding}}", "{{..}}"],
+            "headers": {},
+        },
+    },
     "hf-zembed-1": {
         "source": "rest",
         "apiKey": env['HUGGINGFACE_API_KEY'],

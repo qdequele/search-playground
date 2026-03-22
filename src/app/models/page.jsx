@@ -33,6 +33,7 @@ const models = [
   { name: "local-bge-base-en-v1.5", provider: "HuggingFace (local)", source: "huggingFace", dimensions: 768, indexingTime: "~120m" },
   { name: "local-bge-small-en-v1.5", provider: "HuggingFace (local)", source: "huggingFace", dimensions: 384, indexingTime: "43m 40s" },
   // HuggingFace Inference Endpoints
+  { name: "ms-bge-m3", provider: "Meilisearch", source: "composite", dimensions: 1024, indexingTime: "1m 14s", isNew: true },
   { name: "hf-bge-m3", provider: "HuggingFace (endpoint)", source: "rest", dimensions: 1024, indexingTime: "2m 6s" },
   { name: "hf-bge-small-en-v1.5", provider: "HuggingFace (endpoint)", source: "rest", dimensions: 384, indexingTime: "39s" },
   { name: "hf-mxbai-embed-large", provider: "HuggingFace (endpoint)", source: "rest", dimensions: 1024, indexingTime: "2m 46s" },
@@ -70,6 +71,7 @@ function sourceBadgeVariant(source) {
     case "rest": return "outline";
     case "openAi": return "secondary";
     case "huggingFace": return "default";
+    case "composite": return "destructive";
     default: return "outline";
   }
 }

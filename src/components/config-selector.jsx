@@ -53,6 +53,7 @@ const engines = [
       "local-bge-base-en-v1.5",
       "local-bge-small-en-v1.5",
       "mistral",
+      "ms-bge-m3",
       "hf-bge-m3",
       "hf-bge-small-en-v1.5",
       "hf-mxbai-embed-large",
